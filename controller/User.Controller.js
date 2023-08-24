@@ -34,6 +34,21 @@ const addUser = async (req, res, next)=>{
     }
 }
 
+const updateUser = async (req, res, next)=>{
+    const { id } = req.params
+    const { name, username, email} = req.body
+    try{
+        const data = await User.findByIdAndUpdate(id,{
+            name,
+            username,
+            email
+        })
+        res.status(200).json(data)
+    }catch(err){
+        next(err)
+    }
+}
+
 module.exports = {
     getUser,
     getUsers,
